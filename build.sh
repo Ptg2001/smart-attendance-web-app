@@ -2,6 +2,6 @@
 
 # Install cmake
 pip install cmake
-pip install ./tarballs/dlib-19.19.0-cp38-cp38-win_amd64.whl
+pip install ./tarballs/dlib-19.24.1-cp311-cp311-win_amd64
 # Install Python packages
 pip install -r requirements.txt
