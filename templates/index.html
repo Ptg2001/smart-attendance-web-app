@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://www.pockethrms.com/wp-content/uploads/2020/08/AI-based-Smart-Attendance-System-Blog-Banner-scaled.webp') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            color: #00ff00;
+            overflow: hidden;
+        }
+        header {
+            background: url('https://www.advanceecomsolutions.com/wp-content/uploads/2022/11/blog-attendance-system-img.jpg');
+            background-size: cover;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 120px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .button {
+            display: inline-block;
+            color: #ffffff;
+            background: #e8491d;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: #35424a;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px 0; /* Align to the left */
+            float: left; /* Float to the left */
+        }
+        .card h2 {
+            margin-top: 0;
+            animation: multicolorBlink 2s infinite;
+        }
+        .card p {
+            animation: multicolorBlink 2s infinite;
+        }
+        @keyframes multicolorBlink {
+            0% { color: red; }
+            25% { color: blue; }
+            50% { color: green; }
+            100% { color: red; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Smart Attendance System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/login" class="button">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="card">
+            <h2>Welcome to the Attendance App</h2>
+            <p>Please login to mark attendance.</p>
+        </div>
+    </div>
+</body>
+</html>

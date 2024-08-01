@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance - Attendance App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffff99;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        form {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid #dddddd;
+        }
+        form input[type="submit"] {
+            display: inline-block;
+            color: #ffffff;
+            background: #e8491d;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background: #35424a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Smart Attendance System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard" class="button">Dashboard</a></li>
+                    <li><a href="/logout" class="button">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Mark Attendance</h2>
+        <form method="post" action="/mark_attendance/facial">
+            <input type="submit" value="Mark Attendance Using Facial Recognition">
+        </form>
+        <form method="post" action="/mark_attendance/speech">
+            <input type="submit" value="Mark Attendance Using Speech Recognition">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Attendance App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #77caf7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 2px solid #dddddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .button {
+            display: inline-block;
+            color: #ffffff;
+            background: #e8491d;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: #35424a;
+        }
+        .export-form {
+            display: inline-block;
+        }
+        .export-form select {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Smart Attendance System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/logout" class="button">Logout</a></li>
+                    <li>
+                        <form action="/export" method="get" class="export-form">
+                            <select name="format">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="word">DOCX</option>
+                            </select>
+                            <button type="submit" class="button">Export</button>
+                        </form>
+                    </li>
+                    <li><a href="/mark_attendance" class="button">Mark Attendance</a></li>
+                    <li><a href="/register" class="button">Register New Student</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Dashboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name/Roll Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_records %}
+                <tr>
+                    <td>{{ record.name or record.roll_number }}</td>
+                    <td>{{ record.status }}</td>
+                    <td>
+                        <a href="/delete_attendance/{{ record._id }}" class="button">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/clear_attendance" class="button">Clear All Attendance</a>
+    </div>
+</body>
+</html>

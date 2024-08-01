@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Attendance App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .button {
+            display: inline-block;
+            color: #ffffff;
+            background: #e8491d;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: #35424a;
+        }
+        #video {
+            width: 100%;
+            max-width: 640px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="hidden"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Register New Student</h1>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard" class="button">Back to Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Capture your face</h2>
+        <video id="video" autoplay></video>
+        <form id="registerForm" method="POST">
+            <input type="text" name="name" id="name" placeholder="Enter your name" required>
+            <input type="text" name="roll_number" id="roll_number" placeholder="Enter your roll number" required>
+            <input type="hidden" name="image" id="image">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+    <script>
+        const video = document.getElementById('video');
+        const registerForm = document.getElementById('registerForm');
+        const nameInput = document.getElementById('name');
+        const rollNumberInput = document.getElementById('roll_number');
+        const imageInput = document.getElementById('image');
+
+        // Start video stream from webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing webcam: ", err);
+            });
+
+        // Capture image from webcam when the form is submitted
+        registerForm.addEventListener('submit', event => {
+            event.preventDefault(); // Prevent form submission
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const dataURL = canvas.toDataURL('image/png');
+            imageInput.value = dataURL;
+
+            // Send form data to backend
+            const formData = new FormData();
+            formData.append('name', nameInput.value);
+            formData.append('roll_number', rollNumberInput.value);
+            formData.append('image', dataURL);
+
+            fetch('/register', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Registration successful");
+                    registerForm.reset(); // Reset form fields after successful registration
+                    window.location.href = "/dashboard"; // Redirect to the dashboard page
+                } else {
+                    alert("Error registering student");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error registering student");
+            });
+        });
+    </script>
+</body>
+</html>
