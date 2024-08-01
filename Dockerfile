@@ -22,4 +22,4 @@ RUN wget https://files.pythonhosted.org/packages/05/57/e8a8caa3c89a27f80bc78da39
 COPY . /app
 
 # Specify the command to run your app
-CMD ["python", "your_app.py"]
+CMD ["python", "app.py"]
